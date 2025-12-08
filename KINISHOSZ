@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHENZHEN KINISHO TRADING</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --primary-blue: #0044cc;
+            --primary-red: #ff2442;
+            --primary-gold: #d4af37;
+            --text-dark: #1e293b;
+            --text-grey: #475569;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --section-spacing: 100px; /* Increased spacing */
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+            color: var(--text-dark);
+            background-color: #f1f5f9;
+            line-height: 1.8; /* Increased line-height */
+            font-size: 18px; /* Increased base font size */
+            overflow-x: hidden;
+        }
+
+        /* ARABIC RTL SUPPORT */
+        body.lang-ar {
+            font-family: 'Noto Naskh Arabic', sans-serif;
+            direction: rtl;
+            text-align: right;
+        }
+        
+        /* LANGUAGE VISIBILITY CONTROL */
+        .lang-content { display: none; }
+        body.lang-jp .lang-jp { display: block; }
+        body.lang-en .lang-en { display: block; }
+        body.lang-ar .lang-ar { display: block; }
+
+        /* --- NAVIGATION --- */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 0 4%;
+            height: 80px; /* Increased height */
+            display: flex;
+            align-items: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 26px; /* Larger Logo */
+            color: var(--primary-blue);
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px; /* More space between links */
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 700; /* Bolder */
+            font-size: 16px; /* Larger text */
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--primary-blue); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-blue);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 1px solid #e2e8f0;
+        }
+        .lang-btn {
+            border: 1px solid #cbd5e1;
+            background: transparent;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.2s;
+            color: var(--text-grey);
+        }
+        .lang-btn:hover, .lang-btn.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 90vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background: #0f172a;
+            overflow: hidden;
+            margin-top: 80px; /* Offset for header */
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.5;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1000px;
+            padding: 40px;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.6);
+        }
+        
+        .hero p {
+            font-size: 1.5rem; /* Larger hero text */
+            color: #e2e8f0;
+            margin-bottom: 50px;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 10px 25px rgba(0, 68, 204, 0.4);
+        }
+        .cta-button:hover {
+            transform: translateY(-5px);
+            background: #003399;
+        }
+
+        /* --- SECTIONS COMMON --- */
+        section {
+            padding: var(--section-spacing) 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+        
+        .section-header p {
+            color: var(--text-grey);
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- BUSINESS OVERVIEW --- */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+            transition: transform 0.3s;
+            border-top: 6px solid transparent;
+        }
+        
+        .feature-card:hover { transform: translateY(-15px); }
+        .feature-card.blue { border-top-color: var(--primary-blue); }
+        .feature-card.red { border-top-color: var(--primary-red); }
+        .feature-card.gold { border-top-color: var(--primary-gold); }
+
+        .card-icon {
+            font-size: 50px;
+            margin-bottom: 30px;
+        }
+        .blue .card-icon { color: var(--primary-blue); }
+        .red .card-icon { color: var(--primary-red); }
+        .gold .card-icon { color: var(--primary-gold); }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .feature-card p {
+            font-size: 1.1rem;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 25px;
+        }
+        
+        .feature-card li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            color: var(--text-grey);
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+        }
+        .feature-card li:before {
+            content: "•";
+            color: #cbd5e1;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        .feature-card li:last-child { border-bottom: none; }
+
+        /* --- CASE STUDIES --- */
+        .case-study {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            margin-bottom: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        body.lang-ar .case-study { direction: rtl; }
+
+        .case-image {
+            background: #eee;
+            position: relative;
+            min-height: 500px;
+        }
+        .case-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            position: absolute;
+            transition: transform 0.5s;
+        }
+        .case-study:hover .case-image img {
+            transform: scale(1.03);
+        }
+        
+        .case-content {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .case-tag {
+            display: inline-block;
+            background: #e0f2fe;
+            color: var(--primary-blue);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            width: fit-content;
+            letter-spacing: 1px;
+        }
+
+        .case-content h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .case-content p {
+            font-size: 1.15rem;
+            color: var(--text-grey);
+            margin-bottom: 30px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 10px;
+        }
+        
+        .metric {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-blue);
+        }
+        body.lang-ar .metric { border-left: none; border-right: 4px solid var(--primary-blue); }
+
+        .metric strong { display: block; font-size: 1.5rem; color: var(--text-dark); margin-bottom: 5px; }
+        .metric span { font-size: 0.95rem; color: var(--text-grey); font-weight: 500; }
+
+        /* --- CONSULTING --- */
+        .consulting-banner {
+            background: #1e293b;
+            color: white;
+            border-radius: 24px;
+            padding: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .consulting-content h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .consulting-content p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 600px;
+        }
+
+        .partner-link {
+            background: var(--primary-gold);
+            color: #1e293b;
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            white-space: nowrap;
+        }
+        .partner-link:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* --- TECHNICAL DETAILS --- */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .tech-item {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+        .tech-item strong { 
+            display: block; 
+            color: var(--primary-blue); 
+            margin-bottom: 10px; 
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        /* --- CONTACT --- */
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 100px 5%;
+            text-align: center;
+        }
+        
+        .contact-info h2 { font-size: 2.5rem; margin-bottom: 40px; }
+        .contact-info p {
+            margin: 15px 0;
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .contact-info i { color: var(--primary-blue); }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .section-header h2 { font-size: 2rem; }
+            .case-study { grid-template-columns: 1fr; }
+            .case-image { min-height: 250px; }
+            .consulting-banner { flex-direction: column; text-align: center; padding: 40px; }
+            .nav-links { display: none; } /* Simplified for mobile */
+            .lang-switcher { margin-left: auto; }
+        }
+    </style>
+</head>
+<body class="lang-jp">
+
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <i class="fa-solid fa-earth-asia"></i> KINISHO
+            </a>
+            
+            <div class="nav-links">
+                <a href="#about" class="lang-jp">会社概要</a>
+                <a href="#about" class="lang-en">About</a>
+                <a href="#about" class="lang-ar">حول الشركة</a>
+                
+                <a href="#services" class="lang-jp">サービス</a>
+                <a href="#services" class="lang-en">Services</a>
+                <a href="#services" class="lang-ar">خدماتنا</a>
+                
+                <a href="#cases" class="lang-jp">事例紹介</a>
+                <a href="#cases" class="lang-en">Case Studies</a>
+                <a href="#cases" class="lang-ar">دراسات الحالة</a>
+            </div>
+
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="setLang('jp')">JP</button>
+                <button class="lang-btn" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('ar')">AR</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <!-- New Image: Port/Trade/Global Business -->
+        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1600&q=80" class="hero-bg" alt="Global Trade Network">
+        <div class="hero-content">
+            <div class="lang-jp">
+                <p style="color: #00d2ff; font-weight:700; letter-spacing:2px; margin-bottom:15px; font-size: 1.2rem;">SHENZHEN KINISHO TRADING</p>
+                <h1>Connect Value,<br>Create Future.</h1>
+                <p>深センのサプライチェーン × 日本のブランド力。<br>貿易からコンサルティングまで、ビジネスの全工程を加速します。</p>
+                <a href="#contact" class="cta-button">お問い合わせ</a>
+            </div>
+            <div class="lang-en lang-content">
+                <p style="color: #00d2ff; font-weight:700; letter-spacing:2px; margin-bottom:15px; font-size: 1.2rem;">SHENZHEN KINISHO TRADING</p>
+                <h1>Connect Value,<br>Create Future.</h1>
+                <p>Bridging Shenzhen's Supply Chain with Global Brand Power.<br>Accelerating your business from Trading to Strategic Consulting.</p>
+                <a href="#contact" class="cta-button">Contact Us</a>
+            </div>
+            <div class="lang-ar lang-content">
+                <p style="color: #00d2ff; font-weight:700; letter-spacing:2px; margin-bottom:15px; font-size: 1.2rem;">شنتشن كينيشو للتجارة</p>
+                <h1>ربط القيمة،<br>صنع المستقبل.</h1>
+                <p>جسر يربط سلسلة توريد شنتشن بقوة العلامات التجارية العالمية.<br>نسرع أعمالك من التجارة إلى الاستشارات الاستراتيجية.</p>
+                <a href="#contact" class="cta-button">اتصل بنا</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT / OVERVIEW -->
+    <section id="about">
+        <div class="section-header">
+            <div class="lang-jp">
+                <h2>会社概要 & 強み</h2>
+                <p>拠点：中国・深セン（製造ハブ） + 日本側PM体制</p>
+            </div>
+            <div class="lang-en lang-content">
+                <h2>Overview & Strengths</h2>
+                <p>HQ: Shenzhen (Manufacturing Hub) + Japan PM Team</p>
+            </div>
+            <div class="lang-ar lang-content">
+                <h2>لمحة عامة ونقاط القوة</h2>
+                <p>المقر الرئيسي: شنتشن (مركز التصنيع) + فريق إدارة المشاريع في اليابان</p>
+            </div>
+        </div>
+
+        <div class="tech-grid">
+            <div class="tech-item">
+                <div class="lang-jp">
+                    <strong><i class="fa-solid fa-pen-ruler"></i> DFX (Design for X)</strong>
+                    品質・コスト・法規制を設計段階から織り込む開発手法。
+                </div>
+                <div class="lang-en lang-content">
+                    <strong><i class="fa-solid fa-pen-ruler"></i> DFX (Design for X)</strong>
+                    Integrating quality, cost, and compliance from the design phase.
+                </div>
+                <div class="lang-ar lang-content">
+                    <strong><i class="fa-solid fa-pen-ruler"></i> التصميم من أجل التميز (DFX)</strong>
+                    دمج الجودة والتكلفة والامتثال من مرحلة التصميم.
+                </div>
+            </div>
+            <div class="tech-item">
+                <div class="lang-jp">
+                    <strong><i class="fa-solid fa-bolt"></i> Speed (EVT/DVT/PVT)</strong>
+                    試作(EVT)から量産試作(PVT)までを短サイクルで回し、TATを短縮。
+                </div>
+                <div class="lang-en lang-content">
+                    <strong><i class="fa-solid fa-bolt"></i> Speed (EVT/DVT/PVT)</strong>
+                    Rapid prototyping cycles to shorten Turn-Around Time (TAT).
+                </div>
+                <div class="lang-ar lang-content">
+                    <strong><i class="fa-solid fa-bolt"></i> السرعة (EVT/DVT/PVT)</strong>
+                    دورات نماذج أولية سريعة لتقصير وقت التنفيذ (TAT).
+                </div>
+            </div>
+            <div class="tech-item">
+                <div class="lang-jp">
+                    <strong><i class="fa-solid fa-check-double"></i> QA (品質保証)</strong>
+                    AQL基準の抜取検査、QC工程表による工程管理、初期流動管理。
+                </div>
+                <div class="lang-en lang-content">
+                    <strong><i class="fa-solid fa-check-double"></i> QA (Quality Assurance)</strong>
+                    AQL inspection, QC process charts, and initial flow management.
+                </div>
+                <div class="lang-ar lang-content">
+                    <strong><i class="fa-solid fa-check-double"></i> ضمان الجودة (QA)</strong>
+                    فحص AQL، ومخططات عمليات مراقبة الجودة، وإدارة التدفق الأولي.
+                </div>
+            </div>
+            <div class="tech-item">
+                <div class="lang-jp">
+                    <strong><i class="fa-solid fa-file-contract"></i> Compliance</strong>
+                    PSE, 技適, 薬機法, RoHSなど、仕向け国の法規制適合を一貫対応。
+                </div>
+                <div class="lang-en lang-content">
+                    <strong><i class="fa-solid fa-file-contract"></i> Compliance</strong>
+                    End-to-end support for PSE, Radio Act, RoHS, and local regulations.
+                </div>
+                <div class="lang-ar lang-content">
+                    <strong><i class="fa-solid fa-file-contract"></i> الامتثال</strong>
+                    دعم شامل لـ PSE، وقانون الراديو، و RoHS، واللوائح المحلية.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES (3 PILLARS) -->
+    <section id="services">
+        <div class="overview-grid">
+            <!-- OEM/ODM -->
+            <div class="feature-card blue">
+                <div class="card-icon"><i class="fa-solid fa-industry"></i></div>
+                <div class="lang-jp">
+                    <h3>1. サプライチェーン (OEM/ODM)</h3>
+                    <p>ハードウェアの企画・製造・輸出。</p>
+                    <ul>
+                        <li>美容・ヘルスケア機器 (RF美顔器/EMS)</li>
+                        <li>スマート自販機・無人店舗ソリューション</li>
+                        <li>IPフィギュア・精密工芸品</li>
+                    </ul>
+                </div>
+                <div class="lang-en lang-content">
+                    <h3>1. Supply Chain (OEM/ODM)</h3>
+                    <p>Hardware planning, manufacturing, and export.</p>
+                    <ul>
+                        <li>Beauty & Health Devices (RF/EMS)</li>
+                        <li>Smart Vending & Unmanned Retail</li>
+                        <li>IP Figures & Precision Crafts</li>
+                    </ul>
+                </div>
+                <div class="lang-ar lang-content">
+                    <h3>1. سلسلة التوريد (OEM/ODM)</h3>
+                    <p>تخطيط وتصنيع وتصدير الأجهزة.</p>
+                    <ul>
+                        <li>أجهزة التجميل والصحة (RF/EMS)</li>
+                        <li>البيع الذكي وتجارة التجزئة غير المأهولة</li>
+                        <li>مجسمات IP والحرف الدقيقة</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MARKETING -->
+            <div class="feature-card red">
+                <div class="card-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                <div class="lang-jp">
+                    <h3>2. マーケティング支援</h3>
+                    <p>中国市場進出と認知拡大。</p>
+                    <ul>
+                        <li>小紅書 (RED) KOC口コミ施策</li>
+                        <li>TikTok Shop 運営代行・卸売</li>
+                        <li>流通加工 (検品・ラベル貼り・梱包)</li>
+                    </ul>
+                </div>
+                <div class="lang-en lang-content">
+                    <h3>2. Marketing Support</h3>
+                    <p>China market entry and brand awareness.</p>
+                    <ul>
+                        <li>Xiaohongshu (RED) KOC Strategy</li>
+                        <li>TikTok Shop Operations & Wholesale</li>
+                        <li>Value-added Services (Inspection/Labeling)</li>
+                    </ul>
+                </div>
+                <div class="lang-ar lang-content">
+                    <h3>2. دعم التسويق</h3>
+                    <p>دخول السوق الصيني والوعي بالعلامة التجارية.</p>
+                    <ul>
+                        <li>استراتيجية KOC لـ Xiaohongshu (RED)</li>
+                        <li>عمليات TikTok Shop والبيع بالجملة</li>
+                        <li>خدمات القيمة المضافة (الفحص/وضع العلامات)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CONSULTING -->
+            <div class="feature-card gold">
+                <div class="card-icon"><i class="fa-solid fa-handshake"></i></div>
+                <div class="lang-jp">
+                    <h3>3. コンサルティング</h3>
+                    <p>戦略的パートナーシップ。</p>
+                    <ul>
+                        <li>中国現地法人設立サポート</li>
+                        <li>契約交渉・法務アドバイス</li>
+                        <li><strong style="color:var(--primary-gold);">吉川国際貿易諮詢</strong> との連携</li>
+                    </ul>
+                </div>
+                <div class="lang-en lang-content">
+                    <h3>3. Consulting</h3>
+                    <p>Strategic Partnership.</p>
+                    <ul>
+                        <li>China Entity Setup Support</li>
+                        <li>Contract Negotiation & Legal Advice</li>
+                        <li>Partner: <strong style="color:var(--primary-gold);">Yoshikawa Int'l Consulting</strong></li>
+                    </ul>
+                </div>
+                <div class="lang-ar lang-content">
+                    <h3>3. الاستشارات</h3>
+                    <p>شراكة استراتيجية.</p>
+                    <ul>
+                        <li>دعم تأسيس الكيانات في الصين</li>
+                        <li>التفاوض على العقود والمشورة القانونية</li>
+                        <li>الشريك: <strong style="color:var(--primary-gold);">يوشيكاوا للاستشارات الدولية</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONSULTING BANNER -->
+    <section>
+        <div class="consulting-banner">
+            <div class="consulting-content">
+                <div class="lang-jp">
+                    <h3><i class="fa-solid fa-briefcase"></i> 戦略コンサルティング部門</h3>
+                    <p>市場調査から法的リスク管理まで、専門家がバックアップします。</p>
+                </div>
+                <div class="lang-en lang-content">
+                    <h3><i class="fa-solid fa-briefcase"></i> Strategic Consulting Division</h3>
+                    <p>Expert backup from market research to legal risk management.</p>
+                </div>
+                <div class="lang-ar lang-content">
+                    <h3><i class="fa-solid fa-briefcase"></i> قسم الاستشارات الاستراتيجية</h3>
+                    <p>دعم الخبراء من أبحاث السوق إلى إدارة المخاطر القانونية.</p>
+                </div>
+            </div>
+            
+            <div class="lang-jp">
+                <a href="https://www.yoshikawa-trading.com" target="_blank" class="partner-link">
+                    吉川国際貿易諮詢有限公司 <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+            <div class="lang-en lang-content">
+                <a href="https://www.yoshikawa-trading.com" target="_blank" class="partner-link">
+                    Yoshikawa Int'l Trade Consulting <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+            <div class="lang-ar lang-content">
+                <a href="https://www.yoshikawa-trading.com" target="_blank" class="partner-link">
+                    يوشيكاوا للاستشارات التجارية الدولية <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="cases">
+        <div class="section-header">
+            <div class="lang-jp"><h2>実績紹介 (Case Studies)</h2></div>
+            <div class="lang-en lang-content"><h2>Case Studies</h2></div>
+            <div class="lang-ar lang-content"><h2>دراسات الحالة</h2></div>
+        </div>
+
+        <!-- Case A: Vending -->
+        <div class="case-study">
+            <div class="case-image">
+                <!-- New Image: Vending Machine/Retail -->
+                [Image of Vending Machine]
+                <img src="https://images.unsplash.com/photo-1622675363311-ac97f3a9a301?auto=format&fit=crop&w=800&q=80" alt="Smart Vending Machine">
+            </div>
+            <div class="case-content">
+                <div class="lang-jp">
+                    <span class="case-tag">Case A: スマート自販機</span>
+                    <h3>無人店舗ソリューション</h3>
+                    <p><strong>課題：</strong> 既存機の商品詰まり、運営コスト高。<br><strong>解決策：</strong> 特注スパイラル機構の開発、LED看板・セキュリティゲートを含む空間パッケージ化。</p>
+                    <div class="metrics-grid">
+                        <div class="metric"><strong>250% UP</strong><span>売上向上 (Sales)</span></div>
+                        <div class="metric"><strong>0%</strong><span>商品詰まり率 (Jamming)</span></div>
+                    </div>
+                </div>
+                <div class="lang-en lang-content">
+                    <span class="case-tag">Case A: Smart Vending</span>
+                    <h3>Unmanned Retail Solution</h3>
+                    <p><strong>Challenge:</strong> Product jamming, high OpEx.<br><strong>Solution:</strong> Custom spiral mechanism, full store package with LED signage & security gates.</p>
+                    <div class="metrics-grid">
+                        <div class="metric"><strong>250% UP</strong><span>Sales Growth</span></div>
+                        <div class="metric"><strong>0%</strong><span>Jamming Rate</span></div>
+                    </div>
+                </div>
+                <div class="lang-ar lang-content">
+                    <span class="case-tag">الحالة أ: البيع الذكي</span>
+                    <h3>حل التجزئة غير المأهولة</h3>
+                    <p><strong>التحدي:</strong> تكدس المنتجات، ارتفاع تكاليف التشغيل.<br><strong>الحل:</strong> آلية لولبية مخصصة، حزمة متجر كاملة مع لافتات LED وبوابات أمان.</p>
+                    <div class="metrics-grid">
+                        <div class="metric"><strong>250% زيادة</strong><span>نمو المبيعات</span></div>
+                        <div class="metric"><strong>0%</strong><span>معدل التكدس</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case B: Beauty -->
+        <div class="case-study">
+            <div class="case-content">
+                <div class="lang-jp">
+                    <span class="case-tag">Case B: 美容・日用品</span>
+                    <h3>RF美顔器 & シャワーヘッド</h3>
+                    <p><strong>課題：</strong> 高い金型投資、認証ハードル。<br><strong>解決策：</strong> モジュール共用化設計(DFX)、PSE/食品衛生法適合サポート。</p>
+                    <div class="metrics-grid">
+                        <div class="metric"><strong>-60%</strong><span>初期投資削減 (Cost)</span></div>
+                        <div class="metric"><strong>11.9%</strong><span>市場成長率 (Growth)</span></div>
+                    </div>
+                </div>
+                <div class="lang-en lang-content">
+                    <span class="case-tag">Case B: Beauty & Care</span>
+                    <h3>RF Facial Device & Shower Head</h3>
+                    <p><strong>Challenge:</strong> High mold cost, compliance.<br><strong>Solution:</strong> Shared module design (DFX), PSE/Sanitation Law support.</p>
+                    <div class="metrics-grid">
+                        <div class="metric"><strong>-60%</strong><span>Initial Cost Reduction</span></div>
+                        <div class="metric"><strong>11.9%</strong><span>Market Growth</span></div>
+                    </div>
+                </div>
+                <div class="lang-ar lang-content">
+                    <span class="case-tag">الحالة ب: التجميل والعناية</span>
+                    <h3>جهاز الوجه RF ورأس الدش</h3>
+                    <p><strong>التحدي:</strong> تكلفة القوالب العالية، الامتثال.<br><strong>الحل:</strong> تصميم وحدة مشتركة (DFX)، دعم PSE/قانون الصرف الصحي.</p>
+                    <div class="metrics-grid">
+                        <div class="metric"><strong>-60%</strong><span>خفص التكلفة الأولية</span></div>
+                        <div class="metric"><strong>11.9%</strong><span>نمو السوق</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-image">
+                <!-- New Image: Beauty Device/Spa -->
+                [Image of Beauty Device]
+                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80" alt="Beauty Device">
+            </div>
+        </div>
+
+        <!-- Case C: IP Figures -->
+        <div class="case-study">
+            <div class="case-image">
+                <!-- New Image: Figurine/Craft -->
+                [Image of Collectible Figure]
+                <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=800&q=80" alt="High End Figure">
+            </div>
+            <div class="case-content">
+                <div class="lang-jp">
+                    <span class="case-tag">Case C: IPフィギュア</span>
+                    <h3>ハイエンド工芸品 (ODM)</h3>
+                    <p><strong>課題：</strong> 塗装ズレ、接着剤のはみ出し等のNG。<br><strong>解決策：</strong> 工場駐在員による全数検品体制、AQL基準より厳しい自社基準。</p>
+                    <div class="metrics-grid">
+                        <div class="metric"><strong>&lt; 0.1%</strong><span>不良率 (Defect Rate)</span></div>
+                        <div class="metric"><strong>100%</strong><span>出荷前検品 (Inspection)</span></div>
+                    </div>
+                </div>
+                <div class="lang-en lang-content">
+                    <span class="case-tag">Case C: IP Collectibles</span>
+                    <h3>High-end Figures (ODM)</h3>
+                    <p><strong>Challenge:</strong> Paint defects, glue residue.<br><strong>Solution:</strong> On-site resident engineers, 100% inspection stricter than AQL.</p>
+                    <div class="metrics-grid">
+                        <div class="metric"><strong>&lt; 0.1%</strong><span>Defect Rate</span></div>
+                        <div class="metric"><strong>100%</strong><span>Pre-shipment Inspection</span></div>
+                    </div>
+                </div>
+                <div class="lang-ar lang-content">
+                    <span class="case-tag">الحالة ج: مقتنيات IP</span>
+                    <h3>مجسمات راقية (ODM)</h3>
+                    <p><strong>التحدي:</strong> عيوب الطلاء، بقايا الغراء.<br><strong>الحل:</strong> مهندسون مقيمون في الموقع، فحص 100٪ أكثر صرامة من AQL.</p>
+                    <div class="metrics-grid">
+                        <div class="metric"><strong>&lt; 0.1%</strong><span>معدل العيوب</span></div>
+                        <div class="metric"><strong>100%</strong><span>فحص ما قبل الشحن</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER / CONTACT -->
+    <footer id="contact">
+        <div class="contact-info">
+            <h2 style="margin-bottom:30px; color:white;">Contact Us</h2>
+            <div class="lang-jp">
+                <p>まずは、お気軽にご相談ください。</p>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <p><i class="fa-solid fa-envelope"></i> zoelafz@gmail.com</p>
+                <p><i class="fa-brands fa-weixin"></i> Huaneisheng_Trade</p>
+                <p><i class="fa-solid fa-phone"></i> +86 755 1234 5678</p>
+            </div>
+            
+            <p style="margin-top: 50px; font-size: 1rem; color: #64748b; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
+                © 2025 Shenzhen Kinisho Trading Co., Ltd. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function setLang(lang) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            const activeBtn = Array.from(document.querySelectorAll('.lang-btn')).find(btn => btn.innerText.toLowerCase().includes(lang));
+            if(activeBtn) activeBtn.classList.add('active');
+
+            // Set body class
+            document.body.className = `lang-${lang}`;
+        }
+    </script>
+</body>
+</html>
